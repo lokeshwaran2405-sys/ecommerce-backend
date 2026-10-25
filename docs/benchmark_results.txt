@@ -1,0 +1,7 @@
+Rows: 200000 products, 100000 orders  (median of 30 runs, ms)
+Query plan without index: ['SCAN products']
+Endpoint                                    No index     Indexed    Speed-up
+GET /api/products?category_id=42               12.28        1.10       11.2x
+GET /api/orders?customer_id=1234                9.54        0.68       14.0x
+
+Query plan with index: ['SEARCH products USING COVERING INDEX idx_products_category (category_id=?)']
